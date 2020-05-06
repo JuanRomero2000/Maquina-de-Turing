@@ -37,42 +37,25 @@ function logica() {
 			//Controla el esta Q1 y sus movimientos//
 			while (estado == 1) {
 				if (expresion.charAt(index) == "a") {
-					moverIzquierda();
-					pos++;
 					pasos++;
-					$("#pasos").fadeIn(function () {
-						$(this)
-							.html("Pasos:" + pasos)
-							.fadeIn();
-					});
+					moverIzquierda(estado,pasos);
+					pos++;
+					
 				} else {
 					if (expresion.charAt(index) == "b") {
 						expresion = expresion.replaceAt(index, "a");
 						$("#cuadro" + pos).fadeIn(function () {
 							$(this).html("<h1>a</h1>").fadeIn();
 						});
-						moverIzquierda();
-						pos++;
 						pasos++;
-						$("#pasos").fadeIn(function () {
-							$(this)
-								.html("Pasos:" + pasos)
-								.fadeIn();
-						});
+						moverIzquierda(estado,pasos);
+						pos++;
+						
 					} else {
 						if (expresion.charAt(index) == "B") {
 							estado = 2;
 							pasos++;
-							$("#estado").fadeIn(function () {
-								$(this).html("<h3>Estado: 2</h3>").fadeIn();
-							});
-
-							$("#pasos").fadeIn(function () {
-								$(this)
-									.html("Pasos:" + pasos)
-									.fadeIn();
-							});
-							moverDerecha();
+							moverDerecha(estado,pasos);
 							index--;
 
 							sw = 0;
@@ -82,9 +65,7 @@ function logica() {
 				/*Como hemos restado index, para no tener un movimento de 2 a la derecha y uno a izquierda, se establece un sw*/
 				if (sw == 1) {
 					index++;
-					$("#estado").fadeIn(function () {
-						$(this).html("<h3>Estado: 1</h3>").fadeIn();
-					});
+					
 				}
 			}
 
@@ -92,29 +73,14 @@ function logica() {
 			//Controla el estado Q2 y sus movimientos*/
 			while (estado == 2) {
 				if (expresion.charAt(index) == "a") {
-					moverDerecha();
 					pasos++;
-					$("#pasos").fadeIn(function () {
-						$(this)
-							.html("Pasos:" + pasos)
-							.fadeIn();
-					});
+					moverDerecha(estado,pasos);
+					
 				} else {
 					if (expresion.charAt(index) == "B") {
 						estado = 3;
-
 						pasos++;
-						$("#estado").fadeIn(function () {
-							$(this).html("<h3>Estado: 3</h3>").fadeIn();
-						});
-
-						$("#pasos").fadeIn(function () {
-							$(this)
-								.html("Pasos:" + pasos)
-								.fadeIn();
-						});
-
-						moverIzquierda();
+						moverIzquierda(estado,pasos);
 
 						index++;
 						sw = 0;
@@ -135,26 +101,52 @@ function logica() {
 	}
 }
 
-function moverDerecha() {
+function moverDerecha(estado,pasos) {
 	if (velocidad <= 33) {
-		$(".cuadrado").animate({ left: "+=53px" }, "slow");
+			$(".cuadrado").animate({ left: "+=53px" }, "slow")
+			.fadeIn(function() {
+			$("#estado").html( '<h3>Estado:'+estado+'</h3>' );
+			$("#pasos").html( '<h3>Pasos:'+pasos+'</h3>' );
+
+		  		});
 	} else {
 		if (velocidad > 33 && velocidad <= 66) {
-			$(".cuadrado").animate({ left: "+=53px" }, "medium");
+			$(".cuadrado").animate({ left: "+=53px" }, "medium").
+			fadeIn(function() {
+			$("#estado").html( '<h3>Estado:'+estado+'</h3>' );
+			$("#pasos").html( '<h3>Pasos:'+pasos+'</h3>' );
+			  });
+			
 		} else {
-			$(".cuadrado").animate({ left: "+=53px" }, "fast");
+			$(".cuadrado").animate({ left: "+=53px" }, "fast")
+			.fadeIn(function() {
+			$("#estado").html( '<h3>Estado:'+estado+'</h3>' );
+			$("#pasos").html( '<h3>Pasos:'+pasos+'</h3>' );
+			  });
 		}
 	}
 }
 
-function moverIzquierda() {
+function moverIzquierda(estado,pasos) {
 	if (velocidad <= 33) {
-		$(".cuadrado").animate({ left: "-=53px" }, "slow");
+			$(".cuadrado").animate({ left: "-=53px" }, "slow")
+			.fadeIn(function() {
+			$("#estado").html( '<h3>Estado:'+estado+'</h3>' );
+			$("#pasos").html( '<h3>Pasos:'+pasos+'</h3>' );
+		  		});
 	} else {
 		if (velocidad > 33 && velocidad <= 66) {
-			$(".cuadrado").animate({ left: "-=53px" }, "medium");
+			$(".cuadrado").animate({ left: "-=53px" }, "medium")
+			.fadeIn(function() {
+			$("#estado").html( '<h3>Estado:'+estado+'</h3>' );
+			$("#pasos").html( '<h3>Pasos:'+pasos+'</h3>' );
+				});
 		} else {
-			$(".cuadrado").animate({ left: "-=53px" }, "fast");
+		$(".cuadrado").animate({ left: "-=53px" }, "fast")
+			.fadeIn(function() {
+			$("#estado").html( '<h3>Estado:'+estado+'</h3>' );
+			$("#pasos").html( '<h3>Pasos:'+pasos+'</h3>' );
+				});
 		}
 	}
 }
@@ -166,3 +158,10 @@ function sleep(milliseconds) {
 		currentDate = Date.now();
 	} while (currentDate - date < milliseconds);
 }
+
+//Con esta función podemos manipular el Stop
+$( "#stop" ).click(function() {
+	$( "div" )
+	  .queue( "fx", [] )
+	  .stop();
+  });
