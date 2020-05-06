@@ -1,0 +1,64 @@
+// Grays
+$color: #2874a6;
+$color2: #3687bd;
+$color3: #4092c9;
+$color4: #4f9bce;
+$color5: #60a4d1;
+
+@function makelongshadow($color, $color2, $color3, $color4, $color5) {
+	$val: 0px 0px $color;
+	@for $i from 1 through 20 {
+		$val: #{$val}, -#{$i}px #{$i}px #{$color};
+	}
+	@for $i from 21 through 40 {
+		$val: #{$val}, -#{$i}px #{$i}px #{$color2};
+	}
+	@for $i from 41 through 60 {
+		$val: #{$val}, -#{$i}px #{$i}px #{$color3};
+	}
+	@for $i from 61 through 80 {
+		$val: #{$val}, -#{$i}px #{$i}px #{$color4};
+	}
+	@for $i from 81 through 100 {
+		$val: #{$val}, -#{$i}px #{$i}px #{$color5};
+	}
+	@return $val;
+}
+
+@keyframes animateShadow {
+	0% {
+		text-shadow: makelongshadow($color, $color2, $color3, $color4, $color5);
+	}
+	20% {
+		text-shadow: makelongshadow($color2, $color3, $color4, $color5, $color);
+	}
+	40% {
+		text-shadow: makelongshadow($color3, $color4, $color5, $color, $color2);
+	}
+	60% {
+		text-shadow: makelongshadow($color4, $color5, $color, $color2, $color3);
+	}
+	80% {
+		text-shadow: makelongshadow($color5, $color, $color2, $color3, $color4);
+	}
+	100% {
+		text-shadow: makelongshadow($color, $color2, $color3, $color4, $color5);
+	}
+}
+
+#header {
+	margin-left: auto;
+	margin-right: auto;
+	width: 1000px;
+}
+
+#header h1 {
+	overflow: hidden;
+	color: white;
+	font-family: "Georgia";
+	text-shadow: makelongshadow($color, $color2, $color3, $color4, $color5);
+	animation-name: animateShadow;
+	animation-duration: 1s;
+	animation-iteration-count: infinite;
+	font-size: 80px;
+}

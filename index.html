@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		
+		<link rel="stylesheet" href="css/Styles.css" />
+		<link rel="stylesheet" href="css/titulo.css" />
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+			integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+			crossorigin="anonymous"
+		/>
+		<link rel="stylesheet" href="Semantic-UI-CSS-master/semantic.min.css" />
+
+		<title>Maquina de turing</title>
+	</head>
+
+	<body>
+		<div id="general">
+			<div id="header">
+				<h1>
+					Maquina <br />
+              		De <br />
+					Turing <br />
+				</h1>
+			</div>
+			<div id="logo"><img src="img/2.png" alt=""id="flecha"></div>
+			<div id="container">
+				<div id="marcadores">
+					<h3 id="pasos">Pasos:</h3>
+					<h3 id="estado">Estado:</h3>
+				</div>
+
+				<div id="cinta">
+					<div class="cuadrado" id="cuadro1"></div>
+					<div class="cuadrado" id="cuadro2"></div>
+					<div class="cuadrado" id="cuadro3"></div>
+					<div class="cuadrado" id="cuadro4"></div>
+					<div class="cuadrado" id="cuadro5"></div>
+					<div class="cuadrado" id="cuadro6"></div>
+					<div class="cuadrado" id="cuadro7"></div>
+					<div class="cuadrado" id="cuadro8"></div>
+					<div class="cuadrado" id="cuadro9"></div>
+					<div class="cuadrado" id="cuadro10"></div>
+					<div class="cuadrado" id="cuadro11"></div>
+					<div class="cuadrado" id="cuadro12"></div>
+					<div class="cuadrado" id="cuadro13"></div>
+					<div class="cuadrado" id="cuadro14"></div>
+					<div class="cuadrado" id="cuadro15"></div>
+					<div class="cuadrado" id="cuadro16"></div>
+					<div class="cuadrado" id="cuadro17"></div>
+					<div class="cuadrado" id="cuadro18"></div>
+					<div class="cuadrado" id="cuadro19"></div>
+					<div class="cuadrado" id="cuadro20"></div>
+					<div class="cuadrado" id="cuadro21"></div>
+					<div class="cuadrado" id="cuadro22"></div>
+					<div class="cuadrado" id="cuadro23"></div>
+					<div class="cuadrado" id="cuadro24"></div>
+					<div class="cuadrado" id="cuadro25"></div>
+					<div id="flecha" ><img src="img/1.png" /></div>
+				</div>
+				<div id="control">
+					<form action="">
+						<div id="a" class="col-md-3 input-group mb-3">
+							<input
+								id="input"
+								type="text"
+								class="form-control"
+								placeholder="Ingresa la palabra deseada"
+								autocomplete="off"
+								aria-describedby="basic-addon2"
+							/>
+							<div class="input-group-append">
+								<button id="boton" class="btn btn-outline-secondary" type="button" value="Cargar" onclick="cargar()">
+									cargar
+								</button>
+							</div>
+						</div>
+					</form>
+					<div id="b" class="ui buttons">
+						<button id="play" class="ui button" onclick="logica()" disabled="true">
+							<i class="play icon"></i>
+						</button>
+						<button id="pause" class="ui button" disabled="false">
+							<i class="pause icon"></i>
+						</button>
+						<button id="stop" class="ui button" disabled="true">
+							<i class="stop icon"></i>
+						</button>
+						<button id="step" class="ui button" disabled="true">
+							<i class="step forward icon"></i>
+						</button>
+					</div>
+					<div class="inputDiv form-inline row"">
+						<label class="col-form-label col-sm-4" for="slider">Velocidad:</label>
+						<div class="col-sm-4">
+							<input id="slider" type="range" value="33" min="0" max="99" step="33" autocomplete="off" />
+						</div>						
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<script
+			src="https://code.jquery.com/jquery-3.5.0.min.js"
+			integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+			crossorigin="anonymous"
+		></script>
+		<script src="Semantic-UI-CSS-master/semantic.min.js"></script>
+		<script src="js/cargar.js"></script>
+		<script src="js/logica.js"></script>
+	</body>
+</html>
