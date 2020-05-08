@@ -87,7 +87,7 @@ function logica() {
 
 						document.getElementById("play").setAttribute("disabled", "true");
 						document.getElementById("pause").setAttribute("disabled", "true");
-						document.getElementById("stop").setAttribute("disabled", "true");
+						//document.getElementById("stop").setAttribute("disabled", "true");
 						document.getElementById("step").setAttribute("disabled", "true");
 					}
 				}
@@ -164,4 +164,7 @@ $( "#stop" ).click(function() {
 	$( "div" )
 	  .queue( "fx", [] )
 	  .stop();
+	  window.setTimeout(function(){location.reload()},1000);
   });
+
+ 
