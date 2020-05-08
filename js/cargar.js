@@ -28,11 +28,9 @@ function cargar() {
 				$(this).html("<h3>Estado: </h3>").fadeIn();
 			});
 
-			document.getElementById("input").setAttribute("disabled","true");
 			document.getElementById("play").removeAttribute("disabled");
-			document.getElementById("pause").removeAttribute("disabled");
 			document.getElementById("stop").removeAttribute("disabled");
-			document.getElementById("step").removeAttribute("disabled");
+
 
 		} else {
 			Swal.fire({
