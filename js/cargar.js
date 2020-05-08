@@ -1,5 +1,47 @@
 //llenado de la cinta
 
+var expresion;
+
+function cargar() {
+	expresion = document.getElementById("input").value;
+
+	if (isEmpty(!expresion)) {
+		limpiar_cinta();
+
+		if (validar(expresion) == true) {
+
+			var longitud = expresion.length;
+			var index_palabra = 0;
+			var pos_actual = 13;
+
+			while (index_palabra < longitud) {
+				document.getElementById("cuadro" + pos_actual).innerHTML = "<h1>" + expresion.charAt(index_palabra) + "</h1>";
+				index_palabra++;
+				pos_actual++;
+			}
+			
+			$("#pasos").fadeIn(function () {
+				$(this).html("<h3>Pasos: </h3>").fadeIn();
+			});
+
+			$("#estado").fadeIn(function () {
+				$(this).html("<h3>Estado: </h3>").fadeIn();
+			});
+
+			document.getElementById("input").setAttribute("disabled","true");
+			document.getElementById("play").removeAttribute("disabled");
+			document.getElementById("pause").removeAttribute("disabled");
+			document.getElementById("stop").removeAttribute("disabled");
+			document.getElementById("step").removeAttribute("disabled");
+
+		} else {
+			alert("Expresión invalida");
+		}
+	} else {
+		alert("No has ingresado ninguna expresión");
+	}
+}
+
 function isEmpty(str) {
 	return !str || 0 === str.length;
 }
@@ -13,37 +55,11 @@ function validar(expresion) {
 	return true;
 }
 
-function cargar() {
-	expresion = document.getElementById("input").value;
-
-	if (isEmpty(!expresion)) {
-		limpiar_cinta();
-
-		if (validar(expresion) == true) {
-			document.getElementById("play").removeAttribute("disabled");
-			document.getElementById("pause").removeAttribute("disabled");
-			document.getElementById("stop").removeAttribute("disabled");
-			document.getElementById("step").removeAttribute("disabled");
-
-			var longitud = expresion.length;
-			index = 0;
-			pos = 13;
-
-			while (index < longitud) {
-				document.getElementById("cuadro" + pos).innerHTML = "<h1>" + expresion.charAt(index) + "</h1>";
-				index++;
-				pos++;
-			}
-		} else {
-			alert("Expresión invalida");
-		}
-	} else {
-		alert("No has ingresado ninguna expresión");
-	}
-}
-
 function limpiar_cinta() {
 	for (i = 1; i <= 25; i++) {
 		document.getElementById("cuadro" + i).innerHTML = "";
 	}
 }
+
+
+
