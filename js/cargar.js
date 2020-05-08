@@ -35,10 +35,20 @@ function cargar() {
 			document.getElementById("step").removeAttribute("disabled");
 
 		} else {
-			alert("Expresión invalida");
+			Swal.fire({
+				icon: 'error',
+				title: 'Oops....',
+				text: '¡No puedes iniciar la máquina! La expresión es inválida!'
+				 
+			  })
 		}
 	} else {
-		alert("No has ingresado ninguna expresión");
+		Swal.fire({
+			icon: 'error',
+			title: 'Oops....',
+			text: '¡No puedes iniciar la máquina si la expresión está vacía!'
+			 
+		  })
 	}
 }
 

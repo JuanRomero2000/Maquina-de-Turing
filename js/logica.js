@@ -142,18 +142,11 @@ function moverIzquierda(estado, pasos,contador) {
 }
 
 //Con esta función podemos manipular el Stop
-$("#stop").click(function () {
-	for (i = 1; i <= 25; i++) {
-		document.getElementById("cuadro" + i).innerHTML = "";
-	}
+$( "#stop" ).click(function() {
+	$( "div" )
+	  .queue( "fx", [] )
+	  .stop();
+	  window.setTimeout(function(){location.reload()},1000);
+  });
 
-	$("#pasos").fadeIn(function () {
-		$(this).html("<h3>Pasos: </h3>").fadeIn();
-	});
-
-	$("#estado").fadeIn(function () {
-		$(this).html("<h3>Estado: </h3>").fadeIn();
-	});
-
-	$("div").queue("fx", []).stop();
-});
+ 
