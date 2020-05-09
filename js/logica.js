@@ -9,79 +9,65 @@ var aux = document.querySelector("#slider");
 var velocidad;
 
 function logica() {
+	
+	index = 1;
+	pos = 13;
+	pasos = 0;
+	estado = 1;
+	sw = 1;
+	expresion = "B" + document.getElementById("input").value + "B";
 
-	if (isEmpty(!expresion)) {
-		index = 1;
-		pos = 13;
-		pasos = 0;
-		estado = 1;
-		sw = 1;
-		expresion ="B"+ document.getElementById("input").value + "B";
-
-		while (estado != 3) {
-			//Controla el esta Q1 y sus movimientos//
-			while (estado == 1) {
-				if (expresion.charAt(index) == "a") {
+	while (estado != 3) {
+		//Controla el esta Q1 y sus movimientos//
+		while (estado == 1) {
+			if (expresion.charAt(index) == "a") {
+				pasos++;
+				pos++;
+				moverIzquierda(estado, pasos);
+			} else {
+				if (expresion.charAt(index) == "b") {
+					expresion = expresion.replaceAt(index, "a");
+					$("#cuadro" + pos).fadeIn(function () {
+						$(this).html("<h1>a</h1>").fadeIn();
+					});
 					pasos++;
 					pos++;
 					moverIzquierda(estado, pasos);
 				} else {
-					if (expresion.charAt(index) == "b") {
-						expresion = expresion.replaceAt(index, "a");
-						$("#cuadro" + pos).fadeIn(function () {
-							$(this).html("<h1>a</h1>").fadeIn();
-						});
-						pasos++;
-						pos++;
-						moverIzquierda(estado, pasos);
-
-						
-					} else {
-						if (expresion.charAt(index) == "B") {
-							estado = 2;
-							index--;
-							pasos++;
-							sw = 0;
-							moverDerecha(estado, pasos);
-	
-							
-						}
-					}
-				}
-				/*Como hemos restado index, para no tener un movimento de 2 a la derecha y uno a izquierda, se establece un sw*/
-				if (sw == 1) {
-					index++;
-				}
-			}
-
-			sw = 1;
-			//Controla el estado Q2 y sus movimientos*/
-			while (estado == 2) {
-				if (expresion.charAt(index) == "a") {
-					pasos++;
-					moverDerecha(estado, pasos);
-				} else {
 					if (expresion.charAt(index) == "B") {
-						estado = 3;
-						index++;
+						estado = 2;
+						index--;
 						pasos++;
 						sw = 0;
-						moverIzquierda(estado, pasos);
-
+						moverDerecha(estado, pasos);
 					}
 				}
-				if (sw == 1) {
-					index--;
-				}
+			}
+			/*Como hemos restado index, para no tener un movimento de 2 a la derecha y uno a izquierda, se establece un sw*/
+			if (sw == 1) {
+				index++;
 			}
 		}
-		//document.getElementById("play").setAttribute("disabled", "true");
-		document.getElementById("pause").setAttribute("disabled", "true");
-		//document.getElementById("stop").setAttribute("disabled", "true");
-		document.getElementById("step").setAttribute("disabled", "true");
-		document.getElementById("input").removeAttribute("disabled");
-	} else {
-		alert("No puedes jugar si está vacía la expresión");
+
+		sw = 1;
+		//Controla el estado Q2 y sus movimientos*/
+		while (estado == 2) {
+			if (expresion.charAt(index) == "a") {
+				pasos++;
+				moverDerecha(estado, pasos);
+			} else {
+				if (expresion.charAt(index) == "B") {
+					estado = 3;
+					index++;
+					pasos++;
+					sw = 0;
+					moverIzquierda(estado, pasos);
+				}
+			}
+			if (sw == 1) {
+				index--;
+			}
+		}
 	}
 }
 
@@ -100,13 +86,13 @@ aux.oninput = () => {
 };
 
 function moverDerecha(estado, pasos) {
-	if (velocidad <= 33) {
+	if (velocidad == 0) {
 		$(".cuadrado").animate({ left: "+=53px" }, "slow").fadeIn(function () {
 			$("#estado").html("<h3>Estado:" + estado + "</h3>");
 			$("#pasos").html("<h3>Pasos:" + pasos + "</h3>");
 		});
 	} else {
-		if (velocidad > 33 && velocidad <= 66) {
+		if (velocidad == 33) {
 			$(".cuadrado").animate({ left: "+=53px" }, "medium").fadeIn(function () {
 				$("#estado").html("<h3>Estado:" + estado + "</h3>");
 				$("#pasos").html("<h3>Pasos:" + pasos + "</h3>");
@@ -120,14 +106,14 @@ function moverDerecha(estado, pasos) {
 	}
 }
 
-function moverIzquierda(estado, pasos,contador) {
-	if (velocidad <= 33) {
+function moverIzquierda(estado, pasos) {
+	if (velocidad == 0) {
 		$(".cuadrado").animate({ left: "-=53px" }, "slow").fadeIn(function () {
 			$("#estado").html("<h3>Estado:" + estado + "</h3>");
 			$("#pasos").html("<h3>Pasos:" + pasos + "</h3>");
 		});
 	} else {
-		if (velocidad > 33 && velocidad <= 66) {
+		if (velocidad == 33) {
 			$(".cuadrado").animate({ left: "-=53px" }, "medium").fadeIn(function () {
 				$("#estado").html("<h3>Estado:" + estado + "</h3>");
 				$("#pasos").html("<h3>Pasos:" + pasos + "</h3>");
@@ -142,11 +128,9 @@ function moverIzquierda(estado, pasos,contador) {
 }
 
 //Con esta función podemos manipular el Stop
-$( "#stop" ).click(function() {
-	$( "div" )
-	  .queue( "fx", [] )
-	  .stop();
-	  window.setTimeout(function(){location.reload()},1000);
-  });
-
- 
+$("#stop").click(function () {
+	$("div").queue("fx", []).stop();
+	window.setTimeout(function () {
+		location.reload();
+	}, 100);
+});

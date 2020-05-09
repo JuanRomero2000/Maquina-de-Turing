@@ -28,19 +28,25 @@ function cargar() {
 				$(this).html("<h3>Estado: </h3>").fadeIn();
 			});
 
-			document.getElementById("input").setAttribute("disabled","true");
 			document.getElementById("play").removeAttribute("disabled");
-			document.getElementById("pause").removeAttribute("disabled");
 			document.getElementById("stop").removeAttribute("disabled");
-			document.getElementById("step").removeAttribute("disabled");
+
 
 		} else {
-			Swal.fire({
-				icon: 'error',
-				title: 'Oops....',
-				text: '¡No puedes iniciar la máquina! La expresión es inválida!'
-				 
-			  })
+			if(expresion.length > 12){
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops....',
+					text: '¡Expresión muy extensa! ¡Máximo 12 caracteres!'
+				})
+
+			}else{
+				Swal.fire({
+					icon: 'error',
+					title: 'Oops....',
+					text: '¡No puedes iniciar la máquina! La expresión es inválida!'		 
+				})
+			}
 		}
 	} else {
 		Swal.fire({
@@ -57,11 +63,18 @@ function isEmpty(str) {
 }
 
 function validar(expresion) {
-	for (i = 0; i < expresion.length; i++) {
-		if (expresion.charAt(i) != "a" && expresion.charAt(i) != "b") {
-			return false;
+	
+	if(expresion.length > 12){
+		return false;
+		
+	}else{
+		for (i = 0; i < expresion.length; i++) {
+			if (expresion.charAt(i) != "a" && expresion.charAt(i) != "b") {
+				return false;
+			}
 		}
 	}
+	
 	return true;
 }
 
